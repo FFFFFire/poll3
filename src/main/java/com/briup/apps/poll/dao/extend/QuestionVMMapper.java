@@ -7,5 +7,37 @@ import com.briup.apps.poll.bean.extend.QuestionVM;
 
 public interface QuestionVMMapper {
 	
-	List<QuestionVM> selectFindAll() throws Exception;
+	List<QuestionVM> selectAll() throws Exception;
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

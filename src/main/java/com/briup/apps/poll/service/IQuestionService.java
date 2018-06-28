@@ -9,5 +9,14 @@ public interface IQuestionService {
 	
 	List<Question> findAll() throws Exception;
 	
-	List<QuestionVM> selectAll() throws Exception;
+	List<QuestionVM> findAllQuestionVM() throws Exception;
+	
+//	List<QuestionVM> findByKeywords(String Keywords) throws Exception;
+	
+	void saveOrUpdateQuestionVM(QuestionVM questionVM) throws Exception;
+	
+	void deleteById(long id) throws Exception;
+	
+	//批量删除
+	void batchDelete(List<Long> ids) throws Exception;
 }
