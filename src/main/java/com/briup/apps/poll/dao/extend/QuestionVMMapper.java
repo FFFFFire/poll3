@@ -9,6 +9,8 @@ public interface QuestionVMMapper {
 	
 	List<QuestionVM> selectAll() throws Exception;
 	
+	List<QuestionVM> selectByQuestionnaireId(Long id);
+	
 }
 
 

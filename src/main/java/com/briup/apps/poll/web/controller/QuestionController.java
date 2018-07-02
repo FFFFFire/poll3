@@ -47,6 +47,21 @@ public class QuestionController {
 		}
 	}
 	
+	@ApiOperation(value="查询所有的问题",notes="单表")
+	@GetMapping("findByKeywords")
+	public MsgResponse findByKeywords(String Keywords) throws Exception{
+		try {
+			List<Question> list = questionService.findByKeywords(Keywords);
+			// 返回成功信息
+			return MsgResponse.success("success", list);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 返回失败信息
+			return MsgResponse.error(e.getMessage()) ;
+		}
+	}
+	
+	
 	@ApiOperation(value="保存或修改问题")
 	@PostMapping("saveOrUpdateQuestion")
 	public MsgResponse saveOrUpdate(QuestionVM questionVM) {

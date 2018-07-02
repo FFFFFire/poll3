@@ -36,11 +36,12 @@ public class QuestionServiceImpl implements IQuestionService{
 		return questionVMMapper.selectAll();
 	}
 	
-//	@Override
-//	public List<QuestionVM> findByKeywords(String Keywords) throws Exception {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	@Override
+	public List<Question> findByKeywords(String Keywords) throws Exception {
+		QuestionExample example = new QuestionExample();
+		example.createCriteria().andNameLike(Keywords);
+		return questionMapper.selectByExample(example);
+	}
 	
 	/**
 	 * 保存或修改  （包含选项）

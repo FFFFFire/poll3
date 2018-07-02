@@ -11,7 +11,7 @@ public interface IQuestionService {
 	
 	List<QuestionVM> findAllQuestionVM() throws Exception;
 	
-//	List<QuestionVM> findByKeywords(String Keywords) throws Exception;
+	List<Question> findByKeywords(String Keywords) throws Exception;
 	
 	void saveOrUpdateQuestionVM(QuestionVM questionVM) throws Exception;
 	

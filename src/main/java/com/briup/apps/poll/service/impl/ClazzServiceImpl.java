@@ -31,5 +31,39 @@ public class ClazzServiceImpl implements IClazzService{
 		
 		return clazzVMMapper.selectAll();
 	}
+	
+	//保存或更新Clazz信息  如果ID为空insert   否则update  
+	@Override
+	public void saveOrUpdate(Clazz clazz) throws Exception {
+		if(clazz.getId()==null) {
+			clazzMapper.insert(clazz);
+		}else {
+			clazzMapper.updateByPrimaryKey(clazz);
+		}
+		
+	}
+	
+	//通过ID批量删除Clazz班级信息
+	@Override
+	public void batchDeleteClazz(List<Long> ids) throws Exception {
+		for(long id : ids) {
+			clazzMapper.deleteByPrimaryKey(id);
+		}
+		
+	}
+	
+	//通过ID删除Clazz信息
+	@Override
+	public void deleteById(Long id) throws Exception {
+		clazzMapper.deleteByPrimaryKey(id);
+		
+	}
+
+	@Override
+	public List<Clazz> findByKeywords(String Keywords) throws Exception {
+		ClazzExample example = new ClazzExample();
+		example.createCriteria().andNameLike(Keywords);
+		return clazzMapper.selectByExample(example);
+	}
 
 }
