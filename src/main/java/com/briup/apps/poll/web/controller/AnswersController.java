@@ -37,14 +37,14 @@ public class AnswersController {
 	
 	@ApiOperation(value="修改问卷主观题")
 	@GetMapping("updateAnswerContent")
-	public MsgResponse updateAnswerContent(@RequestParam long id,@RequestParam String content) {
+	public MsgResponse updateAnswerContent(@RequestParam long id, String content) {
 		try {
 			//通过ID找到答卷
 			Answers answer = answersService.findById(id);
 			// 设置答卷内容为content
 			answer.setContent(content);
 			answersService.saveOrUpdate(answer);
-			return MsgResponse.success("success", null);
+			return MsgResponse.success("修改成功", null);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
