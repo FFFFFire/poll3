@@ -17,11 +17,11 @@ public class AnswersServiceImpl implements IAnswersService{
 	private AnswersMapper answersMapper;
 	
 	@Override
-	public void saveOrUpdate(Answers answers) {
-		if(answers.getId()==null) {
-			answersMapper.insert(answers);
+	public void saveOrUpdate(Answers answer) {
+		if(answer.getId()==null) {
+			answersMapper.insert(answer);
 		}else {
-			answersMapper.updateByPrimaryKeySelective(answers);
+			answersMapper.updateByPrimaryKeySelective(answer);
 		}
 		
 	}
@@ -31,6 +31,12 @@ public class AnswersServiceImpl implements IAnswersService{
 		AnswersExample example = new AnswersExample();
 		example.createCriteria().andSurveyIdEqualTo(id);
 		return answersMapper.selectByExample(example);
+	}
+
+	@Override
+	public Answers findById(long id) throws Exception {
+		// TODO Auto-generated method stub
+		return answersMapper.selectByPrimaryKey(id);
 	}
 
 }

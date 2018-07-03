@@ -12,6 +12,7 @@
   	<!-- 定义结果集 -->
   	<resultMap type="com.briup.apps.poll.bean.extend.SurveyVM" id="SurveyVMResult">
   		<id column="id" property="id"/>
+  		<result column="average" jdbcType="DOUBLE" property="average" />
   		<result column="status" property="status"/>
   		<result column="code" property="code"/>
   		<!-- column duiying 表 property duiying类-->
