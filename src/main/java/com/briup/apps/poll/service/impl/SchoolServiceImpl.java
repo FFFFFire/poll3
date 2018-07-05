@@ -47,8 +47,9 @@ public class SchoolServiceImpl implements ISchoolService{
 
 	@Override
 	public void deleteById(long id) throws Exception {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub 
 		schoolMapper.deleteByPrimaryKey(id);
+		
 	}
 
 	@Override

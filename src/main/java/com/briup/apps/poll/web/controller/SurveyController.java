@@ -126,7 +126,7 @@ public class SurveyController {
 			SurveyVM surveyVM = surveyService.findById(id);
 			//2.如果课调状态为未审核才能审核
 			if(surveyVM.getStatus().equals(Survey.STATUS_CHECK_UN)) {
-				//查询出
+				//查询出该课调写所有答卷
 				List<Answers> list = answersService.findAnswersBySurveyId(id);
 				//查询平均分
 				//单个平均分的总和
@@ -192,6 +192,56 @@ public class SurveyController {
 		}
 	}
 	
+	
+	@ApiOperation(value="审核课调",notes="只有当前课调状态为未审核时才能审核   status只能取1/0  如果是0表示不通过")
+	@GetMapping("checkSurvey")
+	public MsgResponse checkSurvey(long id,int status) {
+		try {
+			//1.通过ID查找课调
+			Survey survey = surveyService.findSurveyById(id);
+			//2.判断当前状态
+			if(survey!=null&&survey.getStatus().equals(Survey.STATUS_CHECK_UN)) {
+				if(status == 0) {
+					//2.1status=0 审核不通过
+					survey.setStatus(Survey.STATUS_CHECK_NOPASS);
+				}else {
+					//2.2 status = 1 审核通过
+					survey.setStatus(Survey.STATUS_CHECK_PASS);
+				}
+			}else {
+				return MsgResponse.error("状态不合法");
+			}
+			surveyService.saveOrUpdate(survey);
+			return MsgResponse.success("审核完成", null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
+	
+	@ApiOperation(value="预览课调",notes="只有当前课调状态为审核通过时才能预览   ")
+	@GetMapping("previewSurvey")
+	public MsgResponse previewSurvey(long id) {
+		try {
+			//1.课调的信息（SurveyVM）  
+			SurveyVM surveyVM = surveyService.findById(id);
+			if(surveyVM!=null && surveyVM.getStatus().equals(Survey.STATUS_CHECK_PASS)) {
+				//2.课调的结果 主管题
+				List<Answers> answers = answersService.findAnswersBySurveyId(id);
+				//如 返回,封装到一个对象中
+				SurveyAndAnswersVM savm = new SurveyAndAnswersVM();
+				savm.setSurveyVM(surveyVM);
+				savm.setAnswers(answers);
+				//3.SurveyAndAnswersVM
+				return MsgResponse.success("chengg ", savm);
+			}else {
+				return MsgResponse.error("课调状态不合法");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return MsgResponse.error(e.getMessage());
+		}
+	}
 }
 
 

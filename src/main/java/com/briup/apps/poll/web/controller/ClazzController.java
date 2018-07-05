@@ -46,8 +46,6 @@ public class ClazzController {
 			e.printStackTrace();
 			return MsgResponse.error(e.getMessage());
 		}
-
-		
 	}
 	
 	@ApiOperation(value="添加或更新班级信息")

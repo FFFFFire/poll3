@@ -49,7 +49,6 @@ public class ClazzServiceImpl implements IClazzService{
 		for(long id : ids) {
 			clazzMapper.deleteByPrimaryKey(id);
 		}
-		
 	}
 	
 	//通过ID删除Clazz信息
